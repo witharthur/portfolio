@@ -29,7 +29,7 @@ export default function ContactDialog() {
   }, []);
 
   const onChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setForm((f) => ({ ...f, [name]: value }));
@@ -38,21 +38,36 @@ export default function ContactDialog() {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+
     try {
-      const res = await fetch("/api/contact", {
+      // Create form data for Web3Forms API
+      const formData = new FormData();
+      formData.append("access_key", "b315519d-905f-45a9-8c04-0c541308ae71");
+      formData.append("subject", "New message from Portfolio Contact Form");
+      formData.append(
+        "from_name",
+        `${form.firstName} ${form.lastName}`.trim()
+      );
+      formData.append("email", form.email);
+      formData.append("message", form.message);
+
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: formData,
       });
-      if (!res.ok) throw new Error("Request failed");
-      setForm({ firstName: "", lastName: "", email: "", message: "" });
-      setSent(true);
-      setTimeout(() => {
-        setOpen(false);
-        setSent(false);
-      }, 2200);
+
+      if (res.ok) {
+        setForm({ firstName: "", lastName: "", email: "", message: "" });
+        setSent(true);
+        setTimeout(() => {
+          setOpen(false);
+          setSent(false);
+        }, 2200);
+      } else {
+        toast.error("Failed to send message. Please try again.");
+      }
     } catch (err) {
-      toast.error("Failed to send. Please try again.");
+      toast.error("Something went wrong. Try again later.");
     } finally {
       setLoading(false);
     }
@@ -71,6 +86,7 @@ export default function ContactDialog() {
                 Fill in your details and I’ll get back to you.
               </DialogDescription>
             </DialogHeader>
+
             <form onSubmit={submit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -83,7 +99,7 @@ export default function ContactDialog() {
                     required
                     value={form.firstName}
                     onChange={onChange}
-                    className="w-full rounded-md border bg-background px-3 py-2 outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    className="w-full rounded-md border bg-background px-3 py-2 outline-none"
                   />
                 </div>
                 <div className="space-y-2">
@@ -96,10 +112,11 @@ export default function ContactDialog() {
                     required
                     value={form.lastName}
                     onChange={onChange}
-                    className="w-full rounded-md border bg-background px-3 py-2 outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    className="w-full rounded-md border bg-background px-3 py-2 outline-none"
                   />
                 </div>
               </div>
+
               <div className="space-y-2">
                 <label htmlFor="email" className="text-sm font-medium">
                   Email
@@ -111,9 +128,10 @@ export default function ContactDialog() {
                   required
                   value={form.email}
                   onChange={onChange}
-                  className="w-full rounded-md border bg-background px-3 py-2 outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  className="w-full rounded-md border bg-background px-3 py-2 outline-none"
                 />
               </div>
+
               <div className="space-y-2">
                 <label htmlFor="message" className="text-sm font-medium">
                   Message
@@ -125,9 +143,10 @@ export default function ContactDialog() {
                   rows={5}
                   value={form.message}
                   onChange={onChange}
-                  className="w-full rounded-md border bg-background px-3 py-2 outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  className="w-full rounded-md border bg-background px-3 py-2 outline-none"
                 />
               </div>
+
               <div className="flex items-center justify-end gap-3">
                 <Button
                   type="button"
