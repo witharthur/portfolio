@@ -44,7 +44,7 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* ✅ Fixed Mobile top bar */}
+      {/*  Mobile top bar */}
 <div className="md:hidden fixed top-0 left-0 right-0 z-40 border-b bg-background/80 backdrop-blur-sm">
   <div className="mx-auto flex h-14 items-center justify-between px-4">
     <div

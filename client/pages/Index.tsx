@@ -245,8 +245,8 @@ export default function Index() {
                 </p>
                 <p className="text-sm text-muted-foreground">{s.info}</p>
               </div>
-              <div className="grid place-items-center h-10 w-10 rounded-md bg-gradient-to-br from-primary to-accent text-white opacity-90 shadow-sm">
-                <s.icon className="h-5 w-5 drop-shadow-sm" />
+              <div className="grid place-items-center h-10 w-10 shrink-0 rounded-md bg-gradient-to-br from-primary to-accent text-white opacity-90 shadow-sm">
+                <s.icon className="h-5 w-5 drop-shadow-sm" strokeWidth={2} aria-hidden />
               </div>
             </div>
           ))}
