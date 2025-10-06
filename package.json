@@ -11,7 +11,6 @@
     ]
   },
   "scripts": {
-    "vercel-build": "vite build",
     "dev": "vite",
     "build:client": "vite build",
     "build:server": "vite build --config vite.config.server.ts",
