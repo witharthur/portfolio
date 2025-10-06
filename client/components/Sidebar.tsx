@@ -44,41 +44,41 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Mobile top bar */}
-      <div className="md:hidden sticky top-0 z-50 border-b bg-background">
-        <div className="container mx-auto flex h-14 items-center justify-between">
-          <div
-            className={cn(
-              "flex items-center gap-2 transition-all",
-              showBrand ? "opacity-100" : "opacity-0 pointer-events-none",
-            )}
-          >
-            <div className="relative p-[2px] rounded-full border-2 border-accent/60 bg-background">
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets%2Ff6fa3bdf9e8e426da2f7d929c3f50f27%2Fa7874efb72f94ed5bd6c5805a2110fe4?format=webp&width=200"
-                alt="Avatar"
-                className="h-7 w-7 rounded-full object-cover"
-              />
-              <span className="pointer-events-none absolute inset-0 rounded-full ring-1 ring-accent/30"></span>
-            </div>
-            <span className="font-bold">Arthur</span>
-          </div>
-          <button
-            aria-label="Open navigation"
-            onClick={() => setOpen(true)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-md border"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M4 6h16M4 12h16M4 18h16"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-            </svg>
-          </button>
-        </div>
+      {/* ✅ Fixed Mobile top bar */}
+<div className="md:hidden fixed top-0 left-0 right-0 z-40 border-b bg-background/80 backdrop-blur-sm">
+  <div className="mx-auto flex h-14 items-center justify-between px-4">
+    <div
+      className={cn(
+        "flex items-center gap-2 transition-all duration-300",
+        showBrand ? "opacity-100" : "opacity-0 pointer-events-none"
+      )}
+    >
+      <div className="relative p-[2px] rounded-full border-2 border-accent/60 bg-background">
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets%2Ff6fa3bdf9e8e426da2f7d929c3f50f27%2Fa7874efb72f94ed5bd6c5805a2110fe4?format=webp&width=200"
+          alt="Avatar"
+          className="h-7 w-7 rounded-full object-cover"
+        />
+        <span className="pointer-events-none absolute inset-0 rounded-full ring-1 ring-accent/30"></span>
       </div>
+      <span className="font-bold">Arthur</span>
+    </div>
+    <button
+      aria-label="Open navigation"
+      onClick={() => setOpen(true)}
+      className="inline-flex h-9 w-9 items-center justify-center rounded-md border hover:bg-accent/20 transition"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path
+          d="M4 6h16M4 12h16M4 18h16"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
 
       {/* Desktop sidebar */}
       <aside className="hidden md:flex md:sticky md:top-0 md:h-screen md:w-64 md:flex-col md:border-r md:bg-background">
