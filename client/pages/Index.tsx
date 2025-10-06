@@ -292,16 +292,15 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Experience */}
-      <section
+         <section
         id="experience"
         className="bg-muted/30 py-20 md:py-28 scroll-mt-24"
       >
-        <div className="container mx-auto">
+        <div className="container mx-auto px-4 sm:px-6">
           <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
             Experience
           </h2>
-          <div className="mt-8 grid gap-6 lg:grid-cols-2">
+          <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
             {experience.map((e, i) => (
               <Reveal
                 key={e.role}
@@ -309,9 +308,20 @@ export default function Index() {
                 className="rounded-xl border bg-card p-6 shadow-sm"
                 delay={i * 100}
               >
-                <div className="flex items-center justify-between">
-                  <h3 className="font-semibold">{e.role}</h3>
-                  <span className="text-xs text-muted-foreground">
+                <div className="flex items-start sm:items-center justify-between gap-2">
+                  <div>
+                    <h3 className="font-semibold">{e.role}</h3>
+                    {(() => {
+                      const [start, end] = (e.period || "").split(/—|-/).map((s) => s.trim());
+                      return (
+                        <p className="sm:hidden mt-0.5 text-xs text-muted-foreground leading-snug">
+                          {start} — {end}
+                  
+                        </p>
+                      );
+                    })()}
+                  </div>
+                  <span className="hidden sm:inline text-xs text-muted-foreground whitespace-nowrap">
                     {e.period}
                   </span>
                 </div>
@@ -328,7 +338,6 @@ export default function Index() {
           </div>
         </div>
       </section>
-
       {/* Contact */}
       <section
         id="contact"
